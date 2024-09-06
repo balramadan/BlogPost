@@ -1,0 +1,78 @@
+<template>
+  <div class="px-5 lg:pl-30 lg:w-8/12">
+    <div class="my-5 flex flex-col gap-2">
+      <h2 class="m-0 text-light text-base">Postingan Terbaru</h2>
+      <hr />
+    </div>
+    <div class="">
+      <div
+        id="cardPost"
+        v-for="(item, index) in posts"
+        @click="toBlog(item.permalink)"
+        @mouseenter="hoverCardPost(index)"
+        @mouseleave="hoverCardPost(index)"
+        :key="index"
+        class="flex flex-col lg:flex-row gap-5 py-5 cursor-pointer rounded transition-all duration-300 ease-linear"
+      >
+        <div class="relative lg:w-2/5">
+          <img
+            class="object-cover w-full h-40"
+            :src="`https://rnjqyqiohdhnlcidizdw.supabase.co/storage/v1/object/public/post/${item.image}`"
+            :alt="item.title"
+          />
+          <p
+            id="tagPost"
+            class="text-light text-sm absolute -mt-9 ml-3 bg-primary py-2 px-3 rounded z-10 transition-all duration-300 ease-linear"
+          >
+            {{ item.tag }}
+          </p>
+        </div>
+        <div class="lg:w-3/5">
+          <h2 id="titlePost" class="text-light text-lg text-wrap transition-all duration-300 ease-linear">{{ item.title }}</h2>
+          <div class="flex flex-row gap-2">
+            <p class="text-light text-sm text-light/60">{{ item.author }},</p>
+            <p class="text-light text-sm text-light/60">on {{ item.created_at }}</p>
+          </div>
+          <p class="text-light/40 mt-2">
+            {{ item.description.slice(0, 150) }}...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import axios from "axios";
+import { ref, onBeforeMount } from "vue";
+
+const posts = ref([]);
+
+function hoverCardPost(index) {
+  const cardPost = document.querySelectorAll("#cardPost");
+  const tagPost = document.querySelectorAll("#tagPost");
+  const titlePost = document.querySelectorAll("#titlePost");
+
+  cardPost[index].classList.toggle("bg-light/10");
+  cardPost[index].classList.toggle("px-5");
+  tagPost[index].classList.toggle("bg-primary")
+  tagPost[index].classList.toggle("bg-bright")
+  tagPost[index].classList.toggle("font-bold")
+  titlePost[index].classList.toggle("text-light")
+  titlePost[index].classList.toggle("text-bright")
+}
+
+function toBlog(link) {
+  location.href = `/post/${link}`
+}
+
+onBeforeMount(async () => {
+  await axios.get("/api/post").then((res) => {
+    posts.value = res.data.sort((a, b) => {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
+  });
+});
+</script>
+
+<style></style>

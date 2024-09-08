@@ -11,9 +11,9 @@ export const navStore = defineStore("nav", {
       },
       {
         id: 2,
-        text: "Category",
+        text: "Teknologi",
         isActive: false,
-        href: "/#second",
+        href: "/teknologi",
       },
     //   {
     //     id: 3,

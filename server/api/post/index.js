@@ -2,7 +2,6 @@ import { supabase } from "~/utils/supabase";
 
 export default defineEventHandler(async (event) => {
   const method = getMethod(event);
-  console.log("HTTP Method:", method); // Tambahkan ini untuk log
 
   try {
     if (method === "GET") {

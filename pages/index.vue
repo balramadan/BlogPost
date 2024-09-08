@@ -1,7 +1,8 @@
 <template>
-  <div class="bg-primary h-full">
-    <AdsTop />
-    <div class="flex flex-col lg:flex-row gap-5">
+  <div class="bg-primary h-full min-h-screen">
+    <AdsTop customClass="pt-20 px-5 lg:px-30" />
+    <HomeHeadline />
+    <div class="flex flex-col lg:flex-row gap-5 pb-5">
       <HomeTerbaru />
       <HomePopular customClass="px-5 lg:px-0 order-first lg:order-last lg:pr-30" />
     </div>

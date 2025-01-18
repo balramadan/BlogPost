@@ -7,13 +7,19 @@ export const navStore = defineStore("nav", {
         id: 1,
         text: "Home",
         isActive: true,
-        href: "/#first",
+        href: "/",
       },
       {
         id: 2,
         text: "Teknologi",
         isActive: false,
         href: "/teknologi",
+      },
+      {
+        id: 3,
+        text: "Tips",
+        isActive: false,
+        href: "/tips",
       },
     //   {
     //     id: 3,

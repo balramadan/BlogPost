@@ -39,7 +39,7 @@
     <div class="flex flex-col mt-5 gap-5">
       <p
         v-html="post.description"
-        class="text-light/90 lg:text-16px line-height-normal"
+        class="text-light/90 lg:text-16px line-height-normal text-justify"
       ></p>
       <div v-for="content in post.content" :key="content" class="">
         <h3 v-if="content.sub" class="text-light mb-3 text-xl lg:text-2xl">
@@ -47,7 +47,7 @@
         </h3>
         <p
           v-html="content.text"
-          class="text-light/90 text-16px line-height-normal"
+          class="text-light/90 text-16px line-height-normal text-justify"
         ></p>
       </div>
     </div>
@@ -55,7 +55,7 @@
       <div class="text-light text-sm px-3 py-2">Share:</div>
       <div class="flex gap-4 px-3 py-2 items-center">
         <a
-          href="https://www.facebook.com/sharer/sharer.php?u=https://example.com"
+          :href="`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`"
           target="_blank"
           rel="noopener noreferrer"
           class="text-light"
@@ -73,7 +73,7 @@
           </svg>
         </a>
         <a
-          href="https://twitter.com/intent/tweet?url=https://example.com&text=Check%20out%20this%20awesome%20post!"
+          :href="`https://twitter.com/intent/tweet?url=${currentUrl}&text=Check%20out%20this%20awesome%20post!`"
           target="_blank"
           rel="noopener noreferrer"
           class="text-light"
@@ -98,16 +98,21 @@
 <script setup>
 import axios from "axios";
 import { useRoute } from "#app";
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, onMounted } from "vue";
 
 const route = useRoute();
 const id = route.params.id;
 const post = ref([]);
+const currentUrl = ref("");
 
 onBeforeMount(async () => {
   await axios.get(`/api/post/${id}`).then((res) => {
     post.value = res.data[0];
   });
+});
+
+onMounted(() => {
+  currentUrl.value = window.location.href;
 });
 </script>
 

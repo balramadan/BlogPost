@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     if (method === "GET") {
+      // Mengambil data dari Supabase
       let { data: post, error } = await supabase.from("post").select("*");
       if (error) {
         throw createError({

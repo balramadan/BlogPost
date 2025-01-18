@@ -1,7 +1,7 @@
 <template>
   <div class="px-5 lg:pl-30 lg:w-8/12">
     <div class="my-5 flex flex-col gap-2">
-      <h2 class="m-0 text-light text-base">Postingan Terbaru</h2>
+      <h3 class="m-0 text-light text-base">Postingan Terbaru</h3>
       <hr />
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -28,13 +28,26 @@
           </p>
         </div>
         <div class="">
-          <h2 id="titlePost" class="text-light text-lg transition-all duration-300 ease-linear">{{ item.title }}</h2>
+          <h2
+            id="titlePost"
+            class="text-light text-lg transition-all duration-300 ease-linear"
+          >
+            {{ item.title }}
+          </h2>
           <p class="text-light/40 mt-3">
             {{ item.description.slice(0, 80) }}...
           </p>
-          <div class="flex flex-row gap-2 mt-3">
-            <p class="text-light text-sm text-light/60">{{ item.author }},</p>
-            <p class="text-light text-sm text-light/60">on {{ item.created_at }}</p>
+          <div class="flex flex-col gap-2 mt-3">
+            <div class="flex items-center gap-1">
+              <div class="i-carbon:user-filled w-1.2em"></div>
+              <p class="text-light text-sm text-light/60">{{ item.author }}</p>
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="i-carbon:array-dates w-1.2em"></div>
+              <p class="text-light text-sm text-light/60">
+                {{ item.created_at }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -44,9 +57,29 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onBeforeMount } from "vue";
+import { ref, onMounted } from "vue";
 
 const posts = ref([]);
+const apiKey = process.env.NUXT_PUBLIC_MY_API_KEY;
+
+const fetchPost = async () => {
+  await axios
+    .get("/api/post", {
+      setHeaders: {
+        "X-Api-Key": apiKey,
+      },
+    })
+    .then((res) => {
+      posts.value = res.data
+        .sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        })
+        .slice(0, 18);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
 
 function hoverCardPost(index) {
   const cardPost = document.querySelectorAll("#cardPost");
@@ -55,23 +88,22 @@ function hoverCardPost(index) {
 
   cardPost[index].classList.toggle("bg-light/10");
   cardPost[index].classList.toggle("px-2");
-  tagPost[index].classList.toggle("bg-primary")
-  tagPost[index].classList.toggle("bg-bright")
-  tagPost[index].classList.toggle("font-bold")
-  titlePost[index].classList.toggle("text-light")
-  titlePost[index].classList.toggle("text-bright")
+  cardPost[index].classList.toggle("border");
+  cardPost[index].classList.toggle("border-solid");
+  cardPost[index].classList.toggle("border-light");
+  tagPost[index].classList.toggle("bg-primary");
+  tagPost[index].classList.toggle("bg-bright");
+  tagPost[index].classList.toggle("font-bold");
+  titlePost[index].classList.toggle("text-light");
+  titlePost[index].classList.toggle("text-bright");
 }
 
 function toBlog(link) {
-  location.href = `/post/${link}`
+  location.href = `/post/${link}`;
 }
 
-onBeforeMount(async () => {
-  await axios.get("/api/post").then((res) => {
-    posts.value = res.data.sort((a, b) => {
-      return new Date(b.created_at) - new Date(a.created_at);
-    });
-  });
+onMounted(() => {
+  fetchPost();
 });
 </script>
 

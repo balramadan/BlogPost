@@ -6,7 +6,6 @@
       <Post[id] />
       <HomePopular customClass="lg:pr-0" />
     </div>
-    
   </div>
 </template>
 
@@ -14,10 +13,11 @@
 import axios from "axios";
 import { useRoute } from "#app";
 import { ref, onBeforeMount } from "vue";
+import removeHyphen from "~/utils/removeHyphen";
 
 const route = useRoute();
 const id = route.params.id;
-const namePost = id.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+const namePost = removeHyphen(id);
 const post = ref([]);
 const desPost = ref("");
 const imgPost = ref("");
@@ -31,24 +31,24 @@ onBeforeMount(async () => {
 });
 
 useSeoMeta({
-  title: `Blobal | ${namePost}`,
+  title: `${namePost} | Inspire`,
   description: `${desPost}`,
   image: `https://rnjqyqiohdhnlcidizdw.supabase.co/storage/v1/object/public/post/${imgPost}`,
-  url: "https://example.com",
+  url: `/${id}`,
   type: "website",
-  site_name: "Blobal",
+  site_name: "Inspire",
   twitter: {
     card: "summary_large_image",
     site: "@example",
     creator: "@example",
   },
   og: {
-    title: "Home",
+    title: `${namePost} | Inspire`,
     description: "This is the home page",
-    image: "https://example.com/image.jpg",
+    image: `https://rnjqyqiohdhnlcidizdw.supabase.co/storage/v1/object/public/post/${imgPost}`,
     url: "https://example.com",
     type: "website",
-    site_name: "Example",
+    site_name: "Inspire",
   },
 });
 </script>

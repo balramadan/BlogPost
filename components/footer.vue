@@ -10,7 +10,7 @@
         <a
           @mouseenter="hoverLinkHire"
           @mouseleave="hoverLinkHire"
-          class="bg-light px-8 py-3 text-sm lg:text-base font-bold rounded-full cursor-pointer transition-all duration-300 ease-in-out flex flex-row gap-1 items-center text-primary hidden"
+          class="bg-light px-8 py-3 text-sm lg:text-base font-bold rounded-full cursor-pointer transition-all duration-300 ease-in-out flex-row gap-1 items-center text-primary hidden"
           hover="bg-bright text-light"
           href="mailto:hello@iqbalramadan.me"
           ><p class="m-0">Hire me</p>

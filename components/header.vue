@@ -104,8 +104,8 @@
               <a
                 v-else
                 :href="navItem.href"
-                class="relative py3 transition-all duration-300 ease-linear lg:after-hidden after-absolute after-content-empty after-bg-white after-w-full after-left-0 after-bottom-0 after-h-px after-rd-md after-duration-300 after-ease-linear after-scale-x-0 hover-after-scale-x-100 text-primary lg:text-light"
-                hover="text-white/40 lg:bg-light/40 lg:px-5 lg:rounded-full"
+                class="relative py3 transition-all duration-300 ease-linear lg:after-hidden after-absolute after-content-empty after-bg-white after-w-full after-left-0 after-bottom-0 after-h-px after-rd-md after-duration-300 after-ease-linear after-scale-x-0 hover-after-scale-x-100 text-primary lg:text-light/60"
+                hover="text-white/40 lg:text-white lg:bg-light/40 lg:px-5 lg:rounded-full"
               >
                 {{ navItem.text }}
               </a>

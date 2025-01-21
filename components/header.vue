@@ -96,15 +96,16 @@
               <a
                 v-if="navItem.isActive"
                 :href="navItem.href"
-                class="relative py3 transition-all duration-300 ease-linear lg:after-hidden after-absolute after-content-empty after-bg-primary after-w-full after-left-0 after-bottom-0 after-h-px after-rd-md after-duration-300 after-ease-linear lg:bg-light lg:rounded-full lg:px-5 text-primary"
+                class="relative py3 transition-all duration-300 ease-linear lg:after-hidden after-absolute after-content-empty after-bg-white after-w-full after-left-0 after-bottom-0 after-h-px after-rd-md after-duration-300 after-ease-linear lg:bg-light lg:rounded-full lg:px-5 text-primary"
+                text="white lg:gray-7"
               >
                 {{ navItem.text }}
               </a>
               <a
                 v-else
                 :href="navItem.href"
-                class="relative py3 transition-all duration-300 ease-linear lg:after-hidden after-absolute after-content-empty after-bg-primary after-w-full after-left-0 after-bottom-0 after-h-px after-rd-md after-duration-300 after-ease-linear after-scale-x-0 hover-after-scale-x-100 text-primary lg:text-light"
-                hover="lg:bg-light/40 lg:px-5 lg:rounded-full"
+                class="relative py3 transition-all duration-300 ease-linear lg:after-hidden after-absolute after-content-empty after-bg-white after-w-full after-left-0 after-bottom-0 after-h-px after-rd-md after-duration-300 after-ease-linear after-scale-x-0 hover-after-scale-x-100 text-primary lg:text-light"
+                hover="text-white/40 lg:bg-light/40 lg:px-5 lg:rounded-full"
               >
                 {{ navItem.text }}
               </a>
@@ -114,9 +115,9 @@
         <div class="flex items-center flex-1">
           <router-link
             to="/"
-            class="text-gray-8 dark-text-gray-2 flex items-center gap-x-0.5"
+            class="text-gray-8 dark-text-gray-2 flex items-center gap-x-0.5 w-10 h-10"
           >
-            <img src="/svg/logo.svg" alt="Iqbal" class="h-10" />
+            <img src="/svg/logo.svg" alt="Iqbal" class="h-10 w-10" />
           </router-link>
         </div>
         <div flex justify-end items-center gap-x="1.5 sm:5" w-full text="light">

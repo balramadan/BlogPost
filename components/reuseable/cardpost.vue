@@ -3,8 +3,8 @@
     class="transition-all ease-in-out duration-300 px-2.5 py-5"
     hover="bg-light/10 cursor-pointer border border-solid border-white"
     @click="toPermalink(post?.permalink)"
-    @mouseenter="hoverCard()"
-    @mouseleave="hoverCard()"
+    @mouseenter="hoverCard(index)"
+    @mouseleave="hoverCard(index)"
   >
     <img
       class="object-cover w-full h-40 sm:h-60 rounded"
@@ -46,11 +46,12 @@ const toPermalink = (link: string) => {
   location.href = `/post/${link}`;
 };
 
-const hoverCard = () => {
+const hoverCard = (index: any) => {
   const titlePost = document.querySelector("#titlePost");
 
-  titlePost?.classList.toggle("text-bright");
-  titlePost?.classList.toggle("text-white");
+  const titlePostElement: Array<HTMLElement> = Array.from(document.querySelectorAll("#titlePost"));
+  titlePostElement[index]?.classList.toggle("text-bright");
+  titlePostElement[index]?.classList.toggle("text-white");
 };
 
 interface Post {

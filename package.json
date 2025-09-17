@@ -14,7 +14,7 @@
     "@pinia/nuxt": "^0.9.0",
     "@supabase/supabase-js": "^2.50.0",
     "axios": "^1.8.4",
-    "nuxt": "^3.16.0",
+    "nuxt": "^3.19.0",
     "nuxt-gtag": "^3.0.1",
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^4.2.0",
